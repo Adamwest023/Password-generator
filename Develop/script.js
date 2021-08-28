@@ -11,18 +11,20 @@ function writePassword() {
 
   passwordText.value = password;
 
-}
+};
 
+// Generate password function
 function generatePassword() {
   var userNumber = 1000;
   
-  while(userNumber > 128) {
-    var userInput = prompt("give me a number smaller than 128");
-    var userNumber = parseInt(userInput);
+  while(userNumber >= 128 || userNumber <= 8 || isNaN(userNumber)) {
+    var userInput = prompt("give me a numerical value between 8-128");
+    var userNumber = userInput;
   }
-
+  
+  // variable for password criteria
   var capitalLetter = confirm("Would you like to use captial letters?");
-    var capitalArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G','H']
+    var capitalArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     var lowerCaseLetters = confirm("Would you like to use lowercase letters?");
     var lowerCaseArr = capitalArr.map(capitalArr => capitalArr.toLowerCase());
     var number = confirm("Would you like to use numbers?");
@@ -47,6 +49,11 @@ function generatePassword() {
       possibleChars = possibleChars.concat(specialCharArr)
     }
 
+    if (capitalLetter === false && lowerCaseLetters === false && number === false && special === false) {
+      alert("Must pick at least one catagory");
+      generatePassword();
+    }
+
 
 
   var finalPass = ""
@@ -58,6 +65,7 @@ function generatePassword() {
   }
 
   return finalPass;
-}
+};
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
